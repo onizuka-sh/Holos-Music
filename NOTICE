@@ -1,0 +1,12 @@
+Holos Music
+
+This repository contains selected components copied/adapted from Mornye:
+https://github.com/mornyeapp/Mornye
+Revision c90ec6478ad3e808ef22ba9464f8ad05054dde7b
+Copyright 2026 zarzet
+SPDX-License-Identifier: LGPL-3.0-only
+
+See LICENSE and COPYING for license texts and app/NOTICE_HOLOS.md for component
+provenance and modifications. Original Mornye notices are retained in app/NOTICE.
+Third-party components retain their own licenses; see app/third_party/ and
+app/assets/fonts/GoogleSansFlex-LICENSE.txt.

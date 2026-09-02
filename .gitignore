@@ -1,0 +1,26 @@
+# Reference checkouts are tracked separately; provenance records pin their revision.
+/references/
+/.idea/
+# Original upload retained locally; canonical source is under app/assets/brand/.
+/HolosMusicApplogo.png
+
+# Local media, signing material and machine-specific configuration.
+*.jks
+*.keystore
+**/key.properties
+.env
+.env.*
+!.env.example
+*.flac
+*.wav
+*.mp3
+*.log
+
+# Android/Flutter build caches are also ignored in app/.gitignore.
+**/.gradle/
+**/local.properties
+**/build/
+**/.cxx/
+*.apk
+*.aab
+*.apks

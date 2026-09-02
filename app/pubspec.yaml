@@ -1,0 +1,37 @@
+name: holos_music
+description: Android player for local FLAC files.
+publish_to: none
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.10.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  audioplayers: 6.8.1
+  material_3_expressive: 1.1.6
+
+dependency_overrides:
+  # Match Mornye's lockfile; newer material_ui exports conflicting shape types.
+  material_ui: 1.6.0
+  audioplayers_android:
+    path: third_party/audioplayers_android
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/brand/holos_logo.png
+    - LICENSE
+    - COPYING
+    - NOTICE
+    - assets/fonts/GoogleSansFlex-LICENSE.txt
+  fonts:
+    - family: Google Sans Flex
+      fonts:
+        - asset: assets/fonts/GoogleSansFlex.ttf

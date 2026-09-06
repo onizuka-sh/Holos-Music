@@ -17,13 +17,13 @@ Local playlist import/export is included and never downloads referenced music.
 
 | Item | Current state |
 | --- | --- |
-| Active phase | 0.1.0 manual review pending |
-| Active implementation version | 0.1.0 |
-| Application implementation | 0.1.0 implemented and debug APK built; manual acceptance pending |
-| Versions tested / released | 0 / 0 |
+| Active phase | 0.2.0 manual review pending |
+| Active implementation version | 0.2.0 |
+| Application implementation | 0.1.0 accepted; 0.2.0 implemented and debug APK built, user review pending |
+| Versions tested / released | 0.1.0 user accepted; public release confirmation not recorded |
 | Stack and architecture | Flutter, audioplayers Android fork, Kotlin local-file bridge; no Rust/WSL |
 | Reference | Mornye at c90ec6478ad3e808ef22ba9464f8ad05054dde7b |
-| Next task | User follows MANUAL_TESTING_0.1.0.md; fix reported issues before 0.2.0 |
+| Next task | User follows MANUAL_TESTING_0.2.0.md; fix issues before advancing |
 
 Tools and installation results are in [DEVELOPMENT_SETUP.md](DEVELOPMENT_SETUP.md).
 Rust, WSL and Mornye's full dependency tree are conditional on selected reuse.
@@ -53,8 +53,8 @@ Rust, WSL and Mornye's full dependency tree are conditional on selected reuse.
 
 | Version | Outcome | Status | Implemented | Tested | Released | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| 0.1.0 | Open/play one FLAC file | Implemented | Yes | No | No | Analysis, 12 Flutter tests, 6 native checks, APK build pass; user manual acceptance pending |
-| 0.2.0 | Scan a local collection | Planned | No | No | No | — |
+| 0.1.0 | Open/play one FLAC file | Tested | Yes | User accepted | Unconfirmed | User said done and authorized next version; detailed device/sample matrix not reported |
+| 0.2.0 | Scan a local collection | Implemented | Yes | No | No | Clean analysis, 22 Flutter tests, APK build passed; user review pending |
 | 0.3.0 | Queue and continuous listening | Planned | No | No | No | — |
 | 0.4.0 | Background listening | Planned | No | No | No | — |
 | 0.5.0 | Browse/search a larger library | Planned | No | No | No | — |
@@ -90,7 +90,7 @@ Scope can change, but changes must be recorded and release gates updated explici
   before major integration decisions; determine whether Rust/native reuse is useful.
 - [x] P-10: Select/verify the build route and required tools; assess native Windows
   before requiring WSL. Record reproducible build commands.
-- [ ] P-11: Establish application Git repository, ignore rules and checkpoint practices;
+- [x] P-11: Establish application Git repository, ignore rules and checkpoint practices;
   preserve the separate reference checkout and user changes.
 - [ ] P-12: Decide application ID, supported Android versions and test devices;
   prepare an owned/licensed FLAC test collection.
@@ -109,8 +109,8 @@ Outcome: open one FLAC file and listen inside Holos Music. Depends on preparatio
 - [x] V01-04: Display title, artist when present, duration and position.
 - [x] V01-05: Implement idle/loading/playing/paused/ended/error states and accessible controls.
 - [x] V01-06: Add diagnostic logging suitable for playback failures.
-- [ ] V01-T: Test 16-bit/24-bit FLAC at representative sample rates, missing tags,
-  corrupt files, seeking, picker cancellation and revoked access on a real device.
+- [x] V01-T: User accepted first playback and authorized advancement. Detailed
+  device/sample results (16/24-bit, corrupt files, seeking, cancellation/access) were not supplied.
 - [ ] V01-R: Complete the shared release checklist and distribute a preview APK.
 
 Pass: accessible local FLAC plays and seeks correctly; invalid input is recoverable.
@@ -120,11 +120,11 @@ Background playback and bit-perfect output are not promised in this version.
 
 Outcome: browse a persistent FLAC song list. Depends on tested 0.1.0.
 
-- [ ] V02-01: Select folders and persist granted folder access.
-- [ ] V02-02: Scan nested folders for FLAC without blocking the UI.
-- [ ] V02-03: Persist source identifiers and basic metadata; avoid duplicates on rescans.
-- [ ] V02-04: Show the library and start playback from a selected song.
-- [ ] V02-05: Add manual rescan, progress/cancellation, empty and permission-recovery states.
+- [x] V02-01: Select folders and persist granted folder access.
+- [x] V02-02: Scan nested folders for FLAC without blocking the UI.
+- [x] V02-03: Persist source identifiers and basic metadata; avoid duplicates on rescans.
+- [x] V02-04: Show the library and start playback from a selected song.
+- [x] V02-05: Add manual rescan, progress/cancellation, empty and permission-recovery states.
 - [ ] V02-T: Test nested folders, duplicate filenames, restarts, new files and lost permissions.
 - [ ] V02-R: Complete the shared release checklist.
 
@@ -355,7 +355,8 @@ complete only after all applicable steps below pass.
   resources, and added header/credits logo. Dimensions/XML verified. Updated debug
   APK build passed in session 51076; manual icon/splash review pending.
 - Local regeneration: scripts/generate-app-icons.ps1; canonical source is
-  app/assets/brand/holos_logo_source.png. Original upload retained locally/ignored.
+  app/assets/brand/holos_logo_source.png. Duplicate original upload removed during
+  user-authorized cleanup after hash verification.
 
 - User authorized copying selected Mornye implementation/style and deferring redesign.
 - Source is in app/; exact provenance and modifications are in app/NOTICE_HOLOS.md.
@@ -381,6 +382,23 @@ complete only after all applicable steps below pass.
 
 ## Open decisions and blockers
 
+### 0.2.0 implementation evidence
+
+- Native SAF folder picker retains read grants; recursive scans run on a worker.
+- Private AtomicFile JSON metadata snapshot commits after successful scanning;
+  cancellation keeps the last snapshot. No source music is written/deleted.
+- Stable document identities deduplicate overlapping folder selections without
+  merging distinct songs that happen to have identical filenames/titles.
+- Library UI, progress/cancel, unavailable-folder recovery/removal and selected-track
+  playback added. Existing single-file player is reachable through Now playing.
+- Verification session 21546 caught two constant-expression errors in test fixtures;
+  fixed before successful session 38028.
+- `scripts/verify-and-build.ps1`: format, clean analysis, 22 Flutter tests and debug
+  APK build passed. Tests use fake native/audio services; no device acceptance claimed.
+- APK metadata: org.holosmusic.holos_music, version 0.2.0/code 2, min SDK 24,
+  target SDK 37. Artifact/checksum/checklist: MANUAL_TESTING_0.2.0.md.
+- User manual acceptance and release gates remain unchecked. Nothing committed/pushed.
+
 | ID | Decision | Impact / next action |
 | --- | --- | --- |
 | D-01 | Stack/audio engine | Resolved for 0.1: Flutter/audioplayers + small Kotlin bridge |
@@ -395,7 +413,9 @@ complete only after all applicable steps below pass.
 - 2026-10-27: Version plan expanded into checklists, dashboard and evidence gates.
 - 2026-10-27: Repository layout/ignore/license/reproducibility audit recorded in
   REPOSITORY_AUDIT.md. No GitHub push; manual acceptance remains pending.
-- Current checkpoint: 0.1.0 debug APK built; automated checks passed; user manual review pending.
-- Next session: collect user's manual test results; fix issues or record explicit acceptance before advancing.
+- Current checkpoint: 0.1.0 accepted; 0.2.0 checks/build passed; user manual review pending.
+- Cleanup: removed verified duplicate APKs/logo, unused slider and temporary reports/
+  native-check output; reclaimed 329.6 MiB. Versioned APKs and required source preserved.
+- Next session: collect 0.2.0 manual results, fix issues or record acceptance before 0.3.0.
 - New ideas: evaluate value, dependencies, reuse evidence and effort before scheduling;
   do not silently add them to the active release.

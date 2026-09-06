@@ -36,6 +36,7 @@ class LocalFlacFile {
 abstract interface class LocalFlacPicker {
   Future<LocalFlacFile?> pick();
   Future<void> release(LocalFlacFile file);
+  Future<LocalFlacFile> openUri(String uri);
 }
 
 /// Holds the Android SAF descriptor until the audio plugin releases its source.
@@ -51,4 +52,14 @@ class AndroidLocalFlacPicker implements LocalFlacPicker {
   @override
   Future<void> release(LocalFlacFile file) =>
       channel.invokeMethod<void>('release', {'leaseId': file.leaseId});
+
+  @override
+  Future<LocalFlacFile> openUri(String uri) async {
+    final data = await channel.invokeMapMethod<Object?, Object?>(
+      'openLibraryFile',
+      {'uri': uri},
+    );
+    if (data == null) throw StateError('Missing local file response');
+    return LocalFlacFile.fromMap(data);
+  }
 }

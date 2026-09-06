@@ -10,14 +10,16 @@ existing code before deciding what to reuse, refactor, rewrite, or discard.
 
 ## Current status
 
-- Active phase: Phase 7 — version 0.1.0 manual review pending.
+- Active phase: Version 0.2.0 manual review pending.
 - Workspace: repository root; Android Flutter application in app/.
 - Initial inspection: workspace was empty; no existing application or Git repository.
 - Current product scope: an Android player for the user's local FLAC files.
 - First repository: https://github.com/mornyeapp/Mornye.git
-- Active version: 0.1.0 in app/. Selected Mornye theme, font, seek controls and patched Android audio plugin copied/adapted.
-- Next action: user installs app/build/app/outputs/flutter-apk/app-debug.apk and follows MANUAL_TESTING_0.1.0.md. Resolve reported issues before advancing.
-- Verification: static analysis, 12 Flutter tests, 6 compiled Kotlin FLAC-header checks and Android APK build passed. User manual testing/acceptance remains pending.
+- Active version: 0.2.0 in app/; selected Mornye style and Android SAF flow retained/adapted.
+- User accepted 0.1.0 and authorized the next version. Device/sample details were not supplied.
+- Current work: persistent folder grants, recursive FLAC scans, atomic metadata cache, song list and single-track library playback.
+- Next action: user installs the versioned 0.2.0 debug APK and follows MANUAL_TESTING_0.2.0.md. Resolve reported issues before 0.3.0.
+- Verification: 0.1.0 accepted. For 0.2.0, static analysis, 22 Flutter tests and native Windows Android debug APK build passed. Manual review pending.
 - Current platform scope: Android only. Other platforms are deferred.
 - Stack: Flutter/Dart with Mornye's audioplayers Android fork and a small Kotlin local-file bridge. No Rust or WSL required for 0.1.0. Mornye supplies selected components only.
 

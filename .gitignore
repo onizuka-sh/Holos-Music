@@ -1,7 +1,7 @@
 # Reference checkouts are tracked separately; provenance records pin their revision.
 /references/
 /.idea/
-# Original upload retained locally; canonical source is under app/assets/brand/.
+# Local logo intake copies; canonical source is under app/assets/brand/.
 /HolosMusicApplogo.png
 
 # Local media, signing material and machine-specific configuration.

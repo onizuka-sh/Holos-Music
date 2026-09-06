@@ -12,7 +12,8 @@ Date: 2026-10-27. No staging, commit or push performed by this audit.
 - Included Flutter version pin and upstream SDK preparation script/patch needed
   to reproduce the development SDK on a fresh checkout.
 - Standardized the canonical logo master under app/assets/brand/. The redundant
-  original root upload is preserved locally and ignored; no user file was deleted.
+  original upload was later removed during user-authorized cleanup after verifying
+  it matched the canonical master byte-for-byte.
 - Replaced the generated app README and contradictory old WSL/full-Mornye setup notes.
 - Added consistent source line-ending/binary handling.
 
@@ -35,3 +36,11 @@ Date: 2026-10-27. No staging, commit or push performed by this audit.
 
 This audit checks repository layout, ignore rules, obvious credential patterns and
 documentation consistency. A build from a completely fresh clone has not been run.
+
+## Subsequent cleanup
+
+User-authorized cleanup removed the unused MornyePlayerSlider source, duplicate
+unversioned APKs, duplicate root logo, temporary native-check runner/classes and
+generated Android build reports. Reclaimed 329.6 MiB. Versioned 0.1.0/0.2.0 APKs,
+canonical logo, required source/licenses and active build caches were preserved.
+No remaining imports referenced the deleted slider; no app behavior changed.

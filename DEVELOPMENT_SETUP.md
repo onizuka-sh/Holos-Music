@@ -88,6 +88,10 @@ Avoid installing the full Mornye toolchain for this smaller local-player app.
 
 ## Recorded verification
 
+- Version 0.2.0: clean static analysis, 22 Flutter controller/widget tests and Android
+  debug APK build passed. See MANUAL_TESTING_0.2.0.md for the versioned artifact,
+  checksum and pending device checks. No new dependency downloads were needed.
+
 - Static analysis: passed for the initial 0.1.0 implementation.
 - Flutter controller/widget tests: 12 passed, using fake audio engines.
 - Kotlin FLAC header checks: 6 passed via a compiled local runner.

@@ -17,7 +17,15 @@ void main() {
       createEngine: FakeEngine.new,
     );
     addTearDown(controller.dispose);
-    await tester.pumpWidget(HolosMusicApp(controller: controller));
+    await tester.pumpWidget(
+      HolosMusicApp(
+        controller: controller,
+        libraryService: FakeLibraryService(),
+      ),
+    );
+    await tester.pump();
+    await tester.tap(find.byTooltip('Now playing'));
+    await tester.pumpAndSettle();
     expect(find.text('Holos Music'), findsOneWidget);
     expect(
       tester.widget<IconButton>(find.byKey(const Key('play-pause'))).onPressed,
@@ -53,9 +61,15 @@ void main() {
     await tester.pumpWidget(
       MediaQuery(
         data: const MediaQueryData(textScaler: TextScaler.linear(2)),
-        child: HolosMusicApp(controller: controller),
+        child: HolosMusicApp(
+          controller: controller,
+          libraryService: FakeLibraryService(),
+        ),
       ),
     );
+    await tester.pump();
+    await tester.tap(find.byTooltip('Now playing'));
+    await tester.pumpAndSettle();
     await tester.ensureVisible(find.byKey(const Key('open-file')));
     await tester.tap(find.byKey(const Key('open-file')));
     await tester.pump();

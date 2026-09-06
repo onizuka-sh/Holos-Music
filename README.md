@@ -1,17 +1,19 @@
 # Holos Music
 
-An Android player for local FLAC files. Current milestone: **0.1.0 — first playback**.
+An Android player for local FLAC files. Current milestone: **0.2.0 — local library** (manual review pending).
 
 Open [app/](app/) in Android Studio as a Flutter project. Selected Mornye components
 are copied/adapted for this initial version; design improvements will follow.
 
 ## Current functionality
 
-Open one local FLAC file, view metadata, play/pause/seek, and recover from errors.
-Playback pauses when leaving the app. Library scanning, queues and background
+Version 0.1.0 opens a local FLAC file, shows metadata and supports play/pause/seek.
+Version 0.2.0 adds persistent folders, recursive scans, a song list and playback
+from the library. Playback pauses when leaving the app. Queues and background
 controls follow the [version roadmap](FEATURE_ROADMAP.md).
 
-This is a development preview. Device testing and user acceptance remain pending.
+This is a development preview. The user accepted 0.1.0; 0.2.0 automated checks and
+APK build passed, with manual acceptance pending. See [0.2.0 manual checks](MANUAL_TESTING_0.2.0.md).
 
 ## Run and verify
 
@@ -43,6 +45,16 @@ The Gradle wrapper is included. A phone needs USB debugging for flutter run;
 an emulator can also install a locally built APK by drag-and-drop.
 See [manual checks](MANUAL_TESTING_0.1.0.md).
 
+To format, analyze, test and build in one step, run from the repository root:
+
+```powershell
+.\scripts\verify-and-build.ps1
+```
+
+It stops on the first failure and saves output to app/build/verification.log.
+Run flutter pub get first on a fresh checkout. Use -FlutterPath with the full
+flutter.bat path if Flutter is not on PATH.
+
 ## Repository layout
 
 | Location | Purpose |
@@ -69,7 +81,7 @@ Canonical logo source: app/assets/brand/holos_logo_source.png. From the reposito
 ```
 
 To import a replacement, pass `-Source <path-to-square-png>`. Rebuild/reinstall afterward.
-The original root upload remains local and ignored; the supplied artwork is preserved.
+The canonical master preserves the supplied artwork; generated sizes are used by the app.
 
 ## Project records
 

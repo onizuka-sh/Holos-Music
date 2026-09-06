@@ -1,12 +1,13 @@
 # Holos Music 0.1.0 — manual review
 
-Status: APK built successfully; user acceptance pending.
+Status: user accepted 0.1.0 and authorized 0.2.0. Detailed per-check device/sample
+results were not supplied; individual boxes below remain a record of the original test plan.
 
 Logo update: supplied HolosMusicApplogo.png integrated into launcher/adaptive icons,
 splash, header and credits. Updated debug APK built successfully in session 51076.
 Visual acceptance on the user's device/emulator is pending.
 
-APK: [app-debug.apk](app/build/app/outputs/flutter-apk/app-debug.apk)
+APK: [Holos-Music-v0.1.0-debug.apk](app/build/app/outputs/flutter-apk/Holos-Music-v0.1.0-debug.apk)
 Package: `org.holosmusic.holos_music`; version `0.1.0` / code `1`.
 Minimum Android: 7.0 (API 24). This is a development/debug build, not a public release.
 

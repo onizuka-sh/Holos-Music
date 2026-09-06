@@ -1,6 +1,7 @@
 // Player layout/transport styling follows Mornye's player_playback_controls.dart.
 // Theme, tokens and seek track are adapted/copied from Mornye (LGPL-3.0-only).
 import 'package:flutter/material.dart';
+import '../constants/app_info.dart';
 
 import '../playback/player_controller.dart';
 import '../theme/app_tokens.dart';
@@ -54,8 +55,12 @@ class _PlayerScreenState extends State<PlayerScreen> {
         appBar: AppBar(
           title: Row(
             children: [
-              Image.asset('assets/brand/holos_logo.png', width: 32, height: 32,
-                excludeFromSemantics: true),
+              Image.asset(
+                'assets/brand/holos_logo.png',
+                width: 32,
+                height: 32,
+                excludeFromSemantics: true,
+              ),
               const SizedBox(width: 10),
               const Flexible(child: Text('Holos Music')),
             ],
@@ -67,9 +72,13 @@ class _PlayerScreenState extends State<PlayerScreen> {
               onPressed: () => showLicensePage(
                 context: context,
                 applicationName: 'Holos Music',
-                applicationVersion: '0.1.0',
-                applicationIcon: Image.asset('assets/brand/holos_logo.png',
-                  width: 64, height: 64, semanticLabel: 'Holos Music logo'),
+                applicationVersion: appVersion,
+                applicationIcon: Image.asset(
+                  'assets/brand/holos_logo.png',
+                  width: 64,
+                  height: 64,
+                  semanticLabel: 'Holos Music logo',
+                ),
               ),
             ),
           ],
@@ -140,7 +149,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                                 : 'FLAC · ${file.bitDepth}-bit · ${file.sampleRate / 1000} kHz',
                           ),
                         ),
-                        const Chip(label: Text('0.1.0')),
+                        const Chip(label: Text(appVersion)),
                       ],
                     ),
                     Semantics(

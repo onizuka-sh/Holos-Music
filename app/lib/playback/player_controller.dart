@@ -61,13 +61,18 @@ class PlayerController extends ChangeNotifier {
     _publish();
   }
 
-  Future<void> openFile() async {
+  Future<void> openFile() => _openSelection(picker.pick);
+
+  Future<void> playLibraryFile(String uri) =>
+      _openSelection(() => picker.openUri(uri));
+
+  Future<void> _openSelection(Future<LocalFlacFile?> Function() select) async {
     if (busy || _disposed) return;
     picking = true;
     error = null;
     _publish();
     try {
-      final selected = await picker.pick();
+      final selected = await select();
       if (_disposed) {
         if (selected != null) await picker.release(selected);
         return;
